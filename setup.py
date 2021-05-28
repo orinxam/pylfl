@@ -27,16 +27,16 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="geopt-maxniroomand",
+    name="pylfl",
     version="0.1.0",
     author="Max Niroomand",
     author_email="mpn26@cam.ac.uk",
     description="A package to survey LFLs in ML models",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    url="https://github.com/orinxam/pylfl",
     project_urls={
-        "Bug Tracker": "https://github.com/pypa/sampleproject/issues",
+        "Bug Tracker": "https://github.com/orinxam/pylfl/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
