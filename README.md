@@ -79,8 +79,11 @@ pl.auc()
 This returns the maximum AUC as well as two files, AUCs_unsorted (which is a in-place bijection to the minima in min.data - i.e. the AUC of the minimum in line 25 of min.data is in line 25 of AUCs_unsorted), and AUCs_sorted, which is self-explanatory. 
 
 ## 5) Disconnectivity graphs
-To visualise the landscapes, disconnectivity graphs can be computed using `pl.maketree()` with a `dinfo.template` file.
-
+To visualise the landscapes, disconnectivity graphs can be computed using `pl.maketree()` with a _dinfo_ file. A demplate _dinfo_ file can be created by
+```
+pl.make_dinfo()
+```
+The disconnectivity graph is written to a file named _tree.ps_.
 
 
 
