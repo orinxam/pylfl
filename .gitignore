@@ -1,6 +1,6 @@
-build
-dist
+build/
+dist/
 *.egg-info
 pip-wheel-metadata
 *.pyc
-__pycache__
+__pycache__/
