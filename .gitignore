@@ -1,6 +1,6 @@
-build/
+build/lib/pylfl
 dist/
-*.egg-info
+src/*.egg-info
 pip-wheel-metadata
 *.pyc
-__pycache__/
+src/pylfl/__pycache__/
