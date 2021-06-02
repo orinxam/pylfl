@@ -26,10 +26,10 @@ nin=2 #no. of input nodes
 nhidden=3 #no. of hidden nodes
 nout=2 #no. of output nodes
 dof=17 #degree of freedom = no. of weights
-ndata==sum(1 for line in open('MLPdata')) #count no. of data items
+ndata=sum(1 for line in open('MLPdata')) #count no. of data items
 f_outname='data'
 
-pl.make_gmin_data(nin,nhidden,nout,ndata=ndata,f_outname)
+pl.make_gmin_data(nin,nhidden,nout,ndata=ndata,f_outname=f_outname)
 pl.random_starting_coords(dof)
 ```
 Note that information about the individual keywords of the _data_ file can be found [here](http://www-wales.ch.cam.ac.uk/GMIN.doc/node7.html).
