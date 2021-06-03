@@ -11,10 +11,10 @@ if system == 'Linux':
     pathsample = 'bin/linux/PATHSAMPLE'
     disconnectionDPS = 'bin/linux/disconnectionDPS'
 if system == 'Windows':
-    gmin = 'bin/win/GMIN'
-    optim = 'bin/win/OPTIM'
-    pathsample = 'bin/win/PATHSAMPLE'
-    disconnectionDPS = 'bin/win/disconnectionDPS'
+    gmin = 'bin/win/GMIN.exe'
+    optim = 'bin/win/OPTIM.exe'
+    pathsample = 'bin/win/PATHSAMPLE.exe'
+    disconnectionDPS = 'bin/win/disconnectionDPS.exe'
 if system == 'Darwin':
     gmin = 'bin/mac/GMIN'
     optim = 'bin/mac/OPTIM'
@@ -28,7 +28,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="pylfl",
-    version="0.1.1",
+    version="0.1.3",
     author="Max Niroomand",
     author_email="mpn26@cam.ac.uk",
     description="A package to survey LFLs in ML models",

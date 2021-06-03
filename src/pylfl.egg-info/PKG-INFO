@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pylfl
-Version: 0.1.1
+Version: 0.1.3
 Summary: A package to survey LFLs in ML models
 Home-page: https://github.com/orinxam/pylfl
 Author: Max Niroomand
@@ -43,10 +43,10 @@ nin=2 #no. of input nodes
 nhidden=3 #no. of hidden nodes
 nout=2 #no. of output nodes
 dof=17 #degree of freedom = no. of weights
-ndata==sum(1 for line in open('MLPdata')) #count no. of data items
+ndata=sum(1 for line in open('MLPdata')) #count no. of data items
 f_outname='data'
 
-pl.make_gmin_data(nin,nhidden,nout,ndata=ndata,f_outname)
+pl.make_gmin_data(nin,nhidden,nout,ndata=ndata,f_outname=f_outname)
 pl.random_starting_coords(dof)
 ```
 Note that information about the individual keywords of the _data_ file can be found [here](http://www-wales.ch.cam.ac.uk/GMIN.doc/node7.html).
@@ -96,7 +96,7 @@ pl.auc()
 This returns the maximum AUC as well as two files, AUCs_unsorted (which is a in-place bijection to the minima in min.data - i.e. the AUC of the minimum in line 25 of min.data is in line 25 of AUCs_unsorted), and AUCs_sorted, which is self-explanatory. 
 
 ## 5) Disconnectivity graphs
-To visualise the landscapes, disconnectivity graphs can be computed using `pl.maketree()` with a _dinfo_ file. A demplate _dinfo_ file can be created by
+To visualise the landscapes, disconnectivity graphs can be computed using `pl.maketree()` with a _dinfo_ file. A template _dinfo_ file can be created by
 ```
 pl.make_dinfo()
 ```
