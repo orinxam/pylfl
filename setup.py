@@ -6,19 +6,19 @@ import platform
 system = platform.system()
 #arch, _ = platform.architecture()
 if system == 'Linux':
-    gmin = 'bin/linux/GMIN'
-    optim = 'bin/linux/OPTIM'
-    pathsample = 'bin/linux/PATHSAMPLE'
+    GMIN = 'bin/linux/GMIN'
+    OPTIM = 'bin/linux/OPTIM'
+    PATHSAMPLE = 'bin/linux/PATHSAMPLE'
     disconnectionDPS = 'bin/linux/disconnectionDPS'
 if system == 'Windows':
-    gmin = 'bin/win/GMIN.exe'
-    optim = 'bin/win/OPTIM.exe'
-    pathsample = 'bin/win/PATHSAMPLE.exe'
+    GMIN = 'bin/win/GMIN.exe'
+    OPTIM = 'bin/win/OPTIM.exe'
+    PATHSAMPLE = 'bin/win/PATHSAMPLE.exe'
     disconnectionDPS = 'bin/win/disconnectionDPS.exe'
 if system == 'Darwin':
-    gmin = 'bin/mac/GMIN'
-    optim = 'bin/mac/OPTIM'
-    pathsample = 'bin/mac/PATHSAMPLE'
+    GMIN = 'bin/mac/GMIN'
+    OPTIM = 'bin/mac/OPTIM'
+    PATHSAMPLE = 'bin/mac/PATHSAMPLE'
     disconnectionDPS = 'bin/mac/disconnectionDPS'
 
 print(gmin)
@@ -28,7 +28,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="pylfl",
-    version="0.1.3",
+    version="0.1.4",
     author="Max Niroomand",
     author_email="mpn26@cam.ac.uk",
     description="A package to survey LFLs in ML models",
