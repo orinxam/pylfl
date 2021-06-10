@@ -6,6 +6,19 @@ import platform
 import sys
 import pkgutil
 import re
+import pylfl 
+
+# determine platform at runtime
+system = platform.system()
+#arch, _ = platform.architecture()
+if system == 'Linux':
+    opsys='linux'
+if system == 'Windows':
+    opsys='win'
+if system == 'Darwin':
+    opsys='mac'
+# determine relative path at runtime
+path = pylfl.__path__[0]
 
 # Adds a line to some *data file.
 def add_keyword(keyword, filename:str, params=None):
@@ -36,9 +49,12 @@ def gmin():
         # write output to file
         f = open("gmin_output.txt", "w")
         # execute GMIN binary as defined by setup.py for correct OS
-        subprocess.call('GMIN', stdout=f)
+        if opsys != 'win':
+            subprocess.call(path+f'/bin/{opsys}/GMIN', stdout=f)
+        else:
+            subprocess.call(path+'/bin/win/GMIN.exe', stdout=f)
     else:
-        print('Data or oords file are missing')		
+        print('Data or coords file are missing')		
 
 #run OPTIM
 def optim(outfile='optim_output.txt'):
@@ -46,7 +62,10 @@ def optim(outfile='optim_output.txt'):
         # write output to file
         f = open(outfile, "w")
         # execute OPTIM binary as defined by setup.py for correct OS
-        subprocess.call('OPTIM', stdout=f)
+        if opsys != 'win':
+            subprocess.call(path+f'/bin/{opsys}/OPTIM', stdout=f)
+        else:
+            subprocess.call(path+'/bin/win/OPTIM.exe', stdout=f)
     else:
         print('odata file is missing')
 
@@ -56,7 +75,10 @@ def pathsample():
         # write output to file
         f = open("pathsample_output.txt", "w")
         # execute PS binary as defined by setup.py for correct OS
-        subprocess.call('PATHSAMPLE', stdout=f)
+        if opsys != 'win':
+            subprocess.call(path+f'/bin/{opsys}/PATHSAMPLE', stdout=f)
+        else:
+            subprocess.call(path+'/bin/win/PATHSAMPLE.exe', stdout=f)
     else:
         print('pathdata file is missing')
 

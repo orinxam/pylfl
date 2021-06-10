@@ -3,6 +3,21 @@ import os
 import os.path
 import re
 import subprocess
+import platform
+import pylfl
+
+# determine platform at runtime
+system = platform.system()
+#arch, _ = platform.architecture()
+if system == 'Linux':
+    opsys='linux'
+if system == 'Windows':
+    opsys='win'
+if system == 'Darwin':
+    opsys='mac'
+# determine relative path at runtime
+path = pylfl.__path__[0]
+
 
 def maketree():
     with open("dinfo.template", "r") as template:
@@ -52,7 +67,10 @@ def maketree():
             edited_line = re.sub("NO_OF_MIN", str(min_count), edited_line)
             dinfo.write(edited_line)
 
-    subprocess.call(["disconnectionDPS"])
+    if opsys != 'win':
+        subprocess.call(path+f'/bin/{opsys}/disconnectionDPS', stdout=f)
+    else:
+        subprocess.call(path+'/bin/win/disconnectionDPS.exe', stdout=f)
 
     # Substitute the scale epsilon
     try:

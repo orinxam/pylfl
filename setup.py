@@ -1,35 +1,11 @@
 import setuptools
-import platform
-from glob import glob
 
-# Determine the correct platform for binaries
-system = platform.system()
-#arch, _ = platform.architecture()
-if system == 'Linux':
-    GMIN = 'bin/linux/GMIN'
-    OPTIM = 'bin/linux/OPTIM'
-    PATHSAMPLE = 'bin/linux/PATHSAMPLE'
-    disconnectionDPS = 'bin/linux/disconnectionDPS'
-    os='linux'
-if system == 'Windows':
-    GMIN = 'bin/win/GMIN.exe'
-    OPTIM = 'bin/win/OPTIM.exe'
-    PATHSAMPLE = 'bin/win/PATHSAMPLE.exe'
-    disconnectionDPS = 'bin/win/disconnectionDPS.exe'
-    os='win'
-if system == 'Darwin':
-    GMIN = 'bin/mac/GMIN'
-    OPTIM = 'bin/mac/OPTIM'
-    PATHSAMPLE = 'bin/mac/PATHSAMPLE'
-    disconnectionDPS = 'bin/mac/disconnectionDPS'
-    os='mac'
-
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
+with open("README.md", "r", encoding="utf-8") as f:
+    long_description = f.read()
 
 setuptools.setup(
     name="pylfl",
-    version="0.1.4",
+    version="0.2.3",
     author="Max Niroomand",
     author_email="mpn26@cam.ac.uk",
     description="A package to survey LFLs in ML models",
@@ -47,7 +23,12 @@ setuptools.setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
-    data_files = [('bin',glob(f'{os}/*'))],
+    #data_files = [('bin',glob(f'{os}/*'))],
+    #data_files = [('bin', [GMIN,OPTIM,PATHSAMPLE,disconnectionDPS])],
+    include_package_data=True,
+    #package_data={"pylfl":[f'bin/{os}/*']},
+    #scripts=[GMIN],#,OPTIM,PATHSAMPLE,disconnectionDPS],
+    #data_files=[('bin/mac',['GMIN'])], #,'OPTIM','PATHSAMPLE','disconnectionDPS'])],
 )
 
 
