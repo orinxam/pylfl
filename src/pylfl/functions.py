@@ -7,6 +7,7 @@ import sys
 import pkgutil
 import re
 import pylfl 
+import shutil 
 
 # determine platform at runtime
 system = platform.system()
@@ -77,8 +78,12 @@ def pathsample():
         # execute PS binary as defined by setup.py for correct OS
         if opsys != 'win':
             subprocess.call(path+f'/bin/{opsys}/PATHSAMPLE', stdout=f)
+#            shutil.copyfile(path+f'/bin/{opsys}/OPTIM',path+'/../../../../bin/OPTIM')
+#            shutil.copymode(path+f'/bin/{opsys}/OPTIM',path+'/../../../../bin/OPTIM')
         else:
             subprocess.call(path+'/bin/win/PATHSAMPLE.exe', stdout=f)
+#            shutil.copyfile(path+f'/bin/win/OPTIM',path+'/../../../../bin/OPTIM')
+#            shutil.copymode(path+f'/bin/win/OPTIM',path+'/../../../../bin/OPTIM')
     else:
         print('pathdata file is missing')
 
@@ -119,7 +124,12 @@ def extendpdb(curr_min=1):
     fill_placeholders("pathdata","pathdata","CURR_MIN",curr_min)
     # next do both odata files
     fill_placeholders("odata.tspath.template","odata.tspath","MLP_LINES",mlp_lines)
-    fill_placeholders("odata.connect.template","odata.connect","MLP_LINES",mlp_lines)
+    fill_placeholders("odata.connect.template","odata.connect","MLP_LINES",mlp_line)
+    # need to add OPTIM binary to PATH
+    if opsys != 'win':
+        sys.path.insert(0,path+f'/bin/{opsys}/OPTIM')
+    else:
+        sys.path.insert(0,path+f'/bin/win/OPTIM')
     # finally just run PATHSAMPLE
     pathsample()
     os.remove('path.info.*')

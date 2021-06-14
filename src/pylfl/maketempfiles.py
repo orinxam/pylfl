@@ -1,6 +1,23 @@
 from .functions import add_keyword
 import numpy as np
 import os
+import platform
+
+# get OPTIM path for EXEC ...
+system = platform.system()
+if system == 'Linux':
+    opsys='linux'
+if system == 'Windows':
+    opsys='win'
+if system == 'Darwin':
+    opsys='mac'
+# determine relative path at runtime
+path = pylfl.__path__[0]
+if opsys != 'win':
+    optimpath = path+f'/bin/{opsys}/GMIN'
+else:
+    optimpath = path+'/bin/win/GMIN.exe'
+
 
 # data file for GMIN
 def make_gmin_data(nin,nhidden,nout,norm=True,ndata="MLP_LINES",l2lambda="0.00001",nsteps=100000,f_outname='data.template'):
@@ -53,7 +70,7 @@ def make_pathdata_addmin(nin,nhidden,nout,ndata="MLP_LINES",l2lambda="0.00001"):
     add_keyword('COPYFILES',fname,['MLPdata'])
     add_keyword('EDIFFTOL',fname,['1.0D-4'])
     add_keyword('GEOMDIFFTOL',fname,['1.0D2'])
-    add_keyword('EXEC',fname,['OPTIM'])
+    add_keyword('EXEC',fname,[optimpath])
     add_keyword("TEMPERATURE", fname, ["0.1"])
     add_keyword('PAIRLIST',fname,[1])
     add_keyword('ADDMIN',fname,['min.data.info.all'])
@@ -70,7 +87,7 @@ def make_pathdata_newconnections(nin,nhidden,nout,ndata="MLP_LINES",l2lambda="0.
     add_keyword('COPYFILES',fname,['MLPdata'])
     add_keyword('EDIFFTOL',fname,['1.0D-4'])
     add_keyword('GEOMDIFFTOL',fname,['1.0D2'])
-    add_keyword('EXEC',fname,['OPTIM'])
+    add_keyword('EXEC',fname,[optimpath])
     add_keyword("TEMPERATURE", fname, ["0.1"])
     add_keyword('CYCLES',fname,[5000])
     add_keyword('PAIRLIST',fname,[1])
@@ -165,7 +182,7 @@ def make_pathdata_extractmin(nin,nhidden,nout,ndata="MLP_LINES",l2lambda="0.0000
     add_keyword('COPYFILES',fname,['MLPdata'])
     add_keyword('EDIFFTOL',fname,['1.0D-4'])
     add_keyword('GEOMDIFFTOL',fname,['1.0D2'])
-    add_keyword('EXEC',fname,['OPTIM'])
+    add_keyword('EXEC',fname,[optimpath])
     add_keyword("TEMPERATURE", fname, ["0.1"])
     add_keyword('PAIRLIST',fname,[1])
     add_keyword('EXTRACTMIN',fname,['EXTRACT_NO'])
