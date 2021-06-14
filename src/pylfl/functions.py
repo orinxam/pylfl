@@ -8,6 +8,7 @@ import pkgutil
 import re
 import pylfl 
 import shutil 
+import glob
 
 # determine platform at runtime
 system = platform.system()
@@ -48,12 +49,12 @@ def fill_placeholders(fname:str, newfname:str, keyword:str, var):
 def gmin():
     if os.path.isfile('data') and os.path.isfile('coords') and os.path.isfile('MLPdata'):
         # write output to file
-        f = open("gmin_output.txt", "w")
+        fl = open("gmin_output.txt", "w")
         # execute GMIN binary as defined by setup.py for correct OS
         if opsys != 'win':
-            subprocess.call(path+f'/bin/{opsys}/GMIN', stdout=f)
+            subprocess.call(path+f'/bin/{opsys}/GMIN', stdout=fl)
         else:
-            subprocess.call(path+'/bin/win/GMIN.exe', stdout=f)
+            subprocess.call(path+'/bin/win/GMIN.exe', stdout=fl)
     else:
         print('Data or coords file are missing')		
 
@@ -61,12 +62,12 @@ def gmin():
 def optim(outfile='optim_output.txt'):
     if os.path.isfile('odata') and os.path.isfile('MLPdata'):
         # write output to file
-        f = open(outfile, "w")
+        fl = open(outfile, "w")
         # execute OPTIM binary as defined by setup.py for correct OS
         if opsys != 'win':
-            subprocess.call(path+f'/bin/{opsys}/OPTIM', stdout=f)
+            subprocess.call(path+f'/bin/{opsys}/OPTIM', stdout=fl)
         else:
-            subprocess.call(path+'/bin/win/OPTIM.exe', stdout=f)
+            subprocess.call(path+'/bin/win/OPTIM.exe', stdout=fl)
     else:
         print('odata file is missing')
 
@@ -74,14 +75,14 @@ def optim(outfile='optim_output.txt'):
 def pathsample():
     if os.path.isfile('pathdata') and os.path.isfile('MLPdata'):
         # write output to file
-        f = open("pathsample_output.txt", "w")
+        fl = open("pathsample_output.txt", "w")
         # execute PS binary as defined by setup.py for correct OS
         if opsys != 'win':
-            subprocess.call(path+f'/bin/{opsys}/PATHSAMPLE', stdout=f)
+            subprocess.call(path+f'/bin/{opsys}/PATHSAMPLE', stdout=fl)
 #            shutil.copyfile(path+f'/bin/{opsys}/OPTIM',path+'/../../../../bin/OPTIM')
 #            shutil.copymode(path+f'/bin/{opsys}/OPTIM',path+'/../../../../bin/OPTIM')
         else:
-            subprocess.call(path+'/bin/win/PATHSAMPLE.exe', stdout=f)
+            subprocess.call(path+'/bin/win/PATHSAMPLE.exe', stdout=fl)
 #            shutil.copyfile(path+f'/bin/win/OPTIM',path+'/../../../../bin/OPTIM')
 #            shutil.copymode(path+f'/bin/win/OPTIM',path+'/../../../../bin/OPTIM')
     else:
@@ -124,7 +125,7 @@ def extendpdb(curr_min=1):
     fill_placeholders("pathdata","pathdata","CURR_MIN",curr_min)
     # next do both odata files
     fill_placeholders("odata.tspath.template","odata.tspath","MLP_LINES",mlp_lines)
-    fill_placeholders("odata.connect.template","odata.connect","MLP_LINES",mlp_line)
+    fill_placeholders("odata.connect.template","odata.connect","MLP_LINES",mlp_lines)
     # need to add OPTIM binary to PATH
     if opsys != 'win':
         sys.path.insert(0,path+f'/bin/{opsys}/OPTIM')
@@ -132,8 +133,10 @@ def extendpdb(curr_min=1):
         sys.path.insert(0,path+f'/bin/win/OPTIM')
     # finally just run PATHSAMPLE
     pathsample()
-    os.remove('path.info.*')
-    os.remove('submit_*')
+    for fl in glob.glob('path.info.*'):
+        os.remove(fl)
+    for fl in glob.glob('submit_*'):
+        os.remove(fl) 
     
 
 def auc():

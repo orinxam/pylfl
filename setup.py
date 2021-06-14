@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setuptools.setup(
     name="pylfl",
-    version="0.2.5",
+    version="0.3.0",
     author="Max Niroomand",
     author_email="mpn26@cam.ac.uk",
     description="A package to survey LFLs in ML models",

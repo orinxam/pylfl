@@ -57,12 +57,12 @@ pl.make_pathdata_newconnections(nin,nhidden,nout)
 pl.make_odata_connect(nin,nhidden,nout)
 pl.make_odata_tspath(nin,nhidden,nout)
 ```
-With the keywords again explained in the respective documentations. The 4 keywords `NEWCONNECTIONS, UNTRAP, CONNECTUNC, CONNECTREGION` are of special importance as they describe the four most commonly used ways to connect minima. Only one can be used at a time, and for a first run, `NEWCONNECTIONS` should be used. T
+With the keywords again explained in the respective documentations. The 4 keywords `NEWCONNECTIONS, UNTRAP, CONNECTUNC, CONNECTREGION` are of special importance as they describe the four most commonly used ways to connect minima. Only one can be used at a time, and for a first run, `NEWCONNECTIONS` should be used. the `pathdata.NEWCONNECTIONS` file requires a path to the OPTIM binary and due to Fortran memory pre-allocation, any line of this pathname can be at most 80 characters in length, with multiple lines separater by `+++`.  
 This step can then be executed by
 ```
 pl.extendpdb()
 ```
-which will search connections between minima as specified in the `pathdata.NEWCONNECTIONS` file. his step can be repeated multiple time with different to continuously grow the PATHSAMPLE database.  
+which will search connections between minima as specified in the `pathdata.NEWCONNECTIONS` file. his step can be repeated multiple time with different to continuously grow the PATHSAMPLE database. It is not unusual to se a warning of `Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL` here. 
 
 In general, note that the `data,odata,pathdata` files provided by us are merely first templates to get a system working. As can be seen from the respective documentations, many more options exist to fine-tune the different programs. 
 
