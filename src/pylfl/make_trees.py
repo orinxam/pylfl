@@ -68,9 +68,9 @@ def maketree():
             dinfo.write(edited_line)
 
     if opsys != 'win':
-        subprocess.call(path+f'/bin/{opsys}/disconnectionDPS', stdout=f)
+        subprocess.call(path+f'/bin/{opsys}/disconnectionDPS')
     else:
-        subprocess.call(path+'/bin/win/disconnectionDPS.exe', stdout=f)
+        subprocess.call(path+'/bin/win/disconnectionDPS.exe')
 
     # Substitute the scale epsilon
     try:
