@@ -18,13 +18,17 @@ if opsys != 'win':
     optimpath = path+f'/bin/{opsys}/OPTIM'
 else:
     optimpath = path+'/bin/win/OPTIM.exe'
-# need to add '+++\n after a / at around 70 chars to not break fortran....
+# need to add '+++\n after a / at around 70 chars to not break fortran for mac and linux....
 if optimpath.count('') > 70:
-    nw = np.where((np.cumsum([x.count('') for x in optimpath.split('/')]) < 70) == 1)[0].max()
-    splstr = optimpath.split('/')
+    if opsys != 'win':
+        splitsym = '/'
+    else:
+        splitsym="\\"
+    nw = np.where((np.cumsum([x.count('') for x in optimpath.split(splitsym)]) < 70) == 1)[0].max()
+    splstr = optimpath.split(splitsym)
     splstr.insert(nw+1,'+++\n') 
-    optimpath = '/'.join(splstr)    
-    optimpath = '+++\n'.join(optimpath.split('+++\n/'))
+    optimpath = splitsym.join(splstr)    
+    optimpath = '+++\n'.join(optimpath.split('+++\n'+splitsym))
 
 # data file for GMIN
 def make_gmin_data(nin,nhidden,nout,norm=True,ndata="MLP_LINES",l2lambda="0.00001",nsteps=100000,f_outname='data.template'):

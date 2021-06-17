@@ -130,7 +130,7 @@ def extendpdb(curr_min=1):
     if opsys != 'win':
         sys.path.insert(0,path+f'/bin/{opsys}/OPTIM')
     else:
-        sys.path.insert(0,path+f'/bin/win/OPTIM')
+        sys.path.insert(0,path+f'/bin/win/OPTIM.exe')
     # finally just run PATHSAMPLE
     pathsample()
     for fl in glob.glob('path.info.*'):
